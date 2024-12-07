@@ -4,10 +4,14 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  @apply transition-colors duration-100
+}
+
 
 @layer components{
   .input {
-    @apply cursor-pointer w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6
+    @apply cursor-pointer w-full rounded-md border-0 py-2 px-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 dark:text-white dark:bg-white/5 dark:ring-white/10
   }
 
   .input__in{
@@ -19,16 +23,20 @@
   }
 
   .icon{
-      @apply size-5 text-gray-500
+      @apply size-5 text-gray-500 dark:text-gray-50
   }
 
   .container__input{
     @apply mt-2 flex items-center gap-3 input
   }
+
+  .label{
+    @apply block text-base leading-6 text-gray-900 dark:text-white
+  }
 }
 
 @layer base {
-  body {
+  * {
     font-family: 'Roboto', sans-serif;
   }
 }

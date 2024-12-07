@@ -11,11 +11,30 @@ export const authStore = defineStore('authStore', () => {
   const isAuthorized = ref(false)
 
   const login  = async (loginUser) => {
-    const {data} = api.post('auth/login', loginUser)
-    .catch(err => {
-      console.log("Error: ", err);
-    })
-    console.log(data);
+    try {
+      const { data } = await api.post('auth/login', loginUser); 
+      console.log(data);
+  
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+        isAuthorized.value = true; 
+        user.value = data.user; 
+        router.push({ name: "home" });
+      } else {
+        notif_Store.setNotif({
+          title: "Login Muvaffaqiyatsizlikga uchradi",
+          text: "Token kelmadi. Qayta urinib ko'ring.",
+          status: "error",
+        });
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      notif_Store.setNotif({
+        title: err.response?.data?.message || "Login Error",
+        text: "Iltimos qayta urinib ko`ring",
+        status: "error",
+      });
+    }
   }
 
   const reg = async (newUser) => {
@@ -25,17 +44,15 @@ export const authStore = defineStore('authStore', () => {
             notif_Store.setNotif({
               title: 'Bunday Foydalanuvchi mavjud', text: 'Iltimos qayta urinib ko`ring', status: 'error' 
             })
-            setTimeout(() => {
-              notif_Store.clearNotif()
-            }, 3000);
           }
         })
         
         console.log(res.data);
+        router.push({name: "loginPage"})
         notif_Store.setNotif({
           title: 'Muvaffaqiyatli ro\'yhatdan o\'tdingiz', text: 'Tizimga kirishingiz mumkun', status: 'success' 
         })
-        router.push({name: "loginPage"})
+        
   }
 
   return {
