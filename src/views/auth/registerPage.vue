@@ -110,7 +110,7 @@
                   autocomplete="current-phone"
                   required=""
                   class="input__in"
-                  placeholder="+998 (XX) XXX-XX-XX"
+                  placeholder="Telefon raqamingiz"
                 />
               </div>
             </div>
@@ -146,6 +146,8 @@
                 name="avatar"
                 type="file"
                 autocomplete="current-avatar"
+                @change="fileUpload"
+                ref="fileInput"
                 required=""
                 class="input__in"
                 placeholder="Rasmni yuklang"
@@ -172,6 +174,7 @@
   </div>
 </template>
 <script setup>
+
 import { authStore } from '@/stores/auth/user'
 import { ref } from 'vue'
 import { vMaska } from 'maska/vue'
@@ -186,15 +189,42 @@ import { ArrowUpTrayIcon } from '@heroicons/vue/24/solid'
 const auth__Store = authStore()
 const user = ref({})
 const toggle = ref(false)
+const selectedFile = ref(null)
+const fileInput = ref(null)
+
+
+const fileUpload = (e) => {
+  const file = e.target.files[0]
+  if(file){
+    selectedFile.value = file
+  }else{
+    selectedFile.value = null
+  }
+}
 
 const reg = () => {
-  console.log(user.value)
-  auth__Store.reg(user.value)
-  user.value = {}
+  if(!selectedFile.value){
+    alert('Faylni kiriting!')
+    return
+  }
+  const formData = new FormData()
+  formData.append('avatar', selectedFile.value)
+
+  for (let key in user.value){
+    formData.append(key, user.value[key])
+  }
+  try{
+    auth__Store.reg(formData)
+    user.value = {}
+    selectedFile.value = null
+    fileInput.value.value = ''
+  }catch(error){
+    console.error('Rigistration muvaffaqiyatsiz tugadi: ', error)
+  }
 }
 
 const changeToggle = () => {
   toggle.value = !toggle.value
 }
-
 </script>
+
