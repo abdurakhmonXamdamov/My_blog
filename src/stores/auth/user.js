@@ -38,25 +38,37 @@ export const authStore = defineStore('authStore', () => {
     }
   }
 
-  const reg = async newUser => {
-    const res = await api.post('auth/registration', newUser).catch(err => {
-      if (err.response?.data.error == 'User exists') {
+  const reg = async (newUser) => {
+    try {
+      const res = await api.post('auth/registration', newUser);
+      console.log("Registration successful: ", res);
+  
+      notif_Store.setNotif({
+        title: "Muvaffaqiyatli ro'yhatdan o'tdingiz",
+        text: 'Tizimga kirishingiz mumkun',
+        status: 'success',
+      });
+  
+      router.push({ name: 'loginPage' });
+    } catch (err) {
+      console.log("Error from fetching: ", err);
+  
+      if (err.response?.data.error === 'User exists') {
         notif_Store.setNotif({
           title: 'Bunday Foydalanuvchi mavjud',
           text: 'Iltimos qayta urinib ko`ring',
           status: 'error',
-        })
+        });
+      } else {
+        notif_Store.setNotif({
+          title: 'Xatolik yuz berdi',
+          text: 'Qayta urinib ko`ring',
+          status: 'error',
+        });
       }
-    })
-
-    console.log(res.data)
-    router.push({ name: 'loginPage' })
-    notif_Store.setNotif({
-      title: "Muvaffaqiyatli ro'yhatdan o'tdingiz",
-      text: 'Tizimga kirishingiz mumkun',
-      status: 'success',
-    })
-  }
+    }
+  };
+  
 
   const logout = async () => {
     localStorage.removeItem('token')

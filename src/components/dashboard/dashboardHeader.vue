@@ -38,7 +38,7 @@
     </TransitionRoot>
 
     <div class="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
-          <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden" @click="sidebarOpen = true">
+          <button type="button" class="-m-2.5 p-2.5 text-gray-700 lg:hidden">
             <span class="sr-only">Open sidebar</span>
             <Bars3CenterLeftIcon class="h-6 w-6" aria-hidden="true" />
           </button>
@@ -71,7 +71,7 @@
                 </MenuButton>
                 <transition enter-active-class="transition ease-out duration-100" enter-from-class="transform opacity-0 scale-95" enter-to-class="transform opacity-100 scale-100" leave-active-class="transition ease-in duration-75" leave-from-class="transform opacity-100 scale-100" leave-to-class="transform opacity-0 scale-95">
                   <MenuItems class="absolute right-0 z-10 mt-2.5 w-32 origin-top-right rounded-md bg-white py-2 shadow-lg ring-1 ring-gray-900/5 focus:outline-none">
-                    <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
+                    <MenuItem @click="logOut" v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
                       <a :href="item.href" :class="[active ? 'bg-gray-50' : '', 'block px-3 py-1 text-sm leading-6 text-gray-900']">{{ item.name }}</a>
                     </MenuItem>
                   </MenuItems>
@@ -80,10 +80,16 @@
             </div>
           </div>
     </div>
+    <logout-confirmation @result="confirmLogout"/>
 </template>
 
 <script setup>
 import { ref } from 'vue'
+import { authStore } from '@/stores/auth/user';
+const store = authStore()
+import { useModalStore } from '@/stores/others/modal';
+const modalStore = useModalStore()
+
 import {
   Dialog,
   DialogPanel,
@@ -108,6 +114,7 @@ import {
 } from '@heroicons/vue/24/outline'
 
 import { ChevronDownIcon, MagnifyingGlassIcon } from '@heroicons/vue/20/solid'
+import logoutConfirmation from '../layout/logoutConfirmation.vue';
 
 const navigation = [
   { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
@@ -119,8 +126,20 @@ const navigation = [
 ]
 const userNavigation = [
   { name: 'Your profile', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Log out', href: '#' },
 ]
 
 const sidebarOpen = ref(false)
+
+const logOut = (e) => {
+  if(e.target.innerHTML === "Log out"){
+    modalStore.setLogoutConfirm(true)
+  }
+}
+
+const confirmLogout = (val) => {
+  if(val){
+    store.logout()
+  }
+}
 </script>

@@ -14,7 +14,7 @@ export const menu = [
   {
     path: 'blog',
     name: 'blog',
-    component: () => import('@/views/dashboard/dashboardBlog.vue'),
+    component: () => import('@/views/dashboard/blog/dashboardBlog.vue'),
     meta: {
       title: 'Bloglar',
       icon: BuildingOffice2Icon,
@@ -25,7 +25,7 @@ export const menu = [
   {
     path: 'comments',
     name: 'comments',
-    component: () => import('@/views/dashboard/dashboardComment.vue'),
+    component: () => import('@/views/dashboard/comments/dashboardComment.vue'),
     meta: {
       title: 'Comentariyalar',
       icon: ChatBubbleLeftRightIcon,
@@ -38,7 +38,7 @@ export const settings = [
   {
     path: 'setting',
     name: 'setting',
-    component: () => import('@/views/dashboard/dashboardComment.vue'),
+    component: () => import('@/views/dashboard/comments/dashboardComment.vue'),
     meta: {
       title: 'Sozlamalar',
       icon: Cog6ToothIcon

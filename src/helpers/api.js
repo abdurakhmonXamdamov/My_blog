@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "https://myblogapi.hamkasb.uz";
+const url = "https://myblogapi.hamkasb.uz"; 
 const api = axios.create({
   baseURL: url,
 });

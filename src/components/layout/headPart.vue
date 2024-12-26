@@ -24,7 +24,6 @@ import { useRoute } from 'vue-router';
 const route = useRoute()
 
 const open = () => {
-  console.log("Open");
-  
+  console.log("Opens");
 }
 </script>

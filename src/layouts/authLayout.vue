@@ -3,8 +3,7 @@
     :class="[
     'h-full flex items-center justify-center overflow-hidden dark:bg-gray-900',
     toggle ? 'dark' : ''
-    ]"
->
+    ]">
     <router-view />
 
     <button @click="toggleChange" class="absolute size-9 bottom-8 right-8">

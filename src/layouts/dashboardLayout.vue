@@ -1,8 +1,8 @@
 <template>
 <div>
-    <dashboard-sidebar />
+    <dashboardSidebar />
     <div class="lg:pl-72">
-        <dashboard-header />
+        <dashboardHeader />
         <main class="py-10">
         <div class="px-4 sm:px-6 lg:px-8">
             <router-view />
