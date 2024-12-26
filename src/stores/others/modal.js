@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
 
 export const useModalStore = defineStore('modal', () => {
     const toggle = ref(false);
@@ -8,8 +8,8 @@ export const useModalStore = defineStore('modal', () => {
     const id = ref('');
     const editToggle = ref(false);
 
-    function setLogoutConfirm(payload) {
-        logoutConfirm.value = payload;
+    function setLogoutConfirm(val) {
+        logoutConfirm.value = val;
     }
 
     function setEdit({ id: newId, editToggle: newEditToggle }) {
@@ -17,13 +17,13 @@ export const useModalStore = defineStore('modal', () => {
         editToggle.value = newEditToggle;
     }
 
-    function setConfirmToggle(payload) {
-        confirmToggle.value = payload;
+    function setConfirmToggle(val) {
+        confirmToggle.value = val;
     }
 
-    function setToggle(payload) {
-        toggle.value = payload;
-        if (!payload) {
+    function setToggle(val) {
+        toggle.value = val;
+        if (!val) {
             id.value = '';
             editToggle.value = false;
         }

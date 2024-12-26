@@ -14,12 +14,12 @@ export const menu = [
   {
     path: 'blog',
     name: 'blog',
-    component: () => import('@/views/dashboard/blog/dashboardBlog.vue'),
+    component: () => import('@/views/dashboard/blog/allBlog.vue'),
     meta: {
       title: 'Bloglar',
       icon: BuildingOffice2Icon,
       name: 'Blog'
-    }
+    },
   },
 
   {
