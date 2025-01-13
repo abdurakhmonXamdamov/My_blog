@@ -13,6 +13,8 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.23",
     "@heroicons/vue": "^2.2.0",
+    "@tiptap/extension-heading": "^2.11.2",
+    "@tiptap/extension-underline": "^2.11.2",
     "@tiptap/pm": "^2.10.4",
     "@tiptap/starter-kit": "^2.10.4",
     "@tiptap/vue-3": "^2.10.4",

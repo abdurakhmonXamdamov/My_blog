@@ -7,7 +7,7 @@ export const menu = [
     component: () => import('@/views/dashboard/dashboardPage.vue'),
     meta: {
       title: 'Bosh sahifa',
-      icon: HomeIcon
+      icon: HomeIcon,
     }
   },
 
@@ -18,7 +18,7 @@ export const menu = [
     meta: {
       title: 'Bloglar',
       icon: BuildingOffice2Icon,
-      name: 'Blog'
+      name: 'Blog',
     },
   },
 
@@ -29,7 +29,7 @@ export const menu = [
     meta: {
       title: 'Comentariyalar',
       icon: ChatBubbleLeftRightIcon,
-      name: 'Comment'
+      name: 'Comment',
     }
   },
 ]
@@ -41,7 +41,7 @@ export const settings = [
     component: () => import('@/views/dashboard/comments/dashboardComment.vue'),
     meta: {
       title: 'Sozlamalar',
-      icon: Cog6ToothIcon
+      icon: Cog6ToothIcon,
     }
   },
 ]

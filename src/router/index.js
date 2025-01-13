@@ -15,7 +15,7 @@ const router = createRouter({
             path: 'blog/add',
             name: 'add-blogs',
             component: () => import('@/views/dashboard/blog/addBlog.vue'),
-            meta: {title: "Yangilik qo'shish", var: 'news'},
+            meta: {title: "Yangilik qo'shish", var: "add-blogs"},
           }
       ]
     },
